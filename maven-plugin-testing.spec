@@ -4,7 +4,7 @@
 
 Name:           %{?scl_prefix}%{pkg_name}
 Version:        2.1
-Release:        11.13%{?dist}
+Release:        11.14%{?dist}
 Summary:        Maven Plugin Testing
 License:        ASL 2.0
 URL:            http://maven.apache.org/plugin-testing/
@@ -14,12 +14,12 @@ BuildArch: noarch
 BuildRequires: %{?scl_prefix_java_common}easymock2
 BuildRequires: %{?scl_prefix_java_common}junit
 BuildRequires: %{?scl_prefix_java_common}maven-local
-BuildRequires: maven30-maven-resources-plugin
-BuildRequires: maven30-maven-source-plugin
-BuildRequires: maven30-plexus-containers-component-metadata
-BuildRequires: maven30-maven-javadoc-plugin
-BuildRequires: maven30-maven-doxia-sitetools
-BuildRequires: maven30-maven-reporting-impl
+BuildRequires: %{?scl_prefix}maven-resources-plugin
+BuildRequires: %{?scl_prefix}maven-source-plugin
+BuildRequires: %{?scl_prefix}plexus-containers-component-metadata
+BuildRequires: %{?scl_prefix}maven-javadoc-plugin
+BuildRequires: %{?scl_prefix}maven-doxia-sitetools
+BuildRequires: %{?scl_prefix}maven-reporting-impl
 #BuildRequires: %{?scl_prefix}maven-test-tools
 
 %description
@@ -54,7 +54,7 @@ Framework to test Maven Plugins with Easymock objects.
 %setup -q -n %{pkg_name}-%{version}
 
 %build
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 %mvn_alias : org.apache.maven.shared:
 # Tests are skipped due to some test failures most probably caused by issues 
@@ -63,7 +63,7 @@ set -e -x
 %{?scl:EOF}
 
 %install
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 %mvn_install
 %{?scl:EOF}
@@ -85,6 +85,9 @@ set -e -x
 %doc LICENSE NOTICE
 
 %changelog
+* Mon Jan 11 2016 Michal Srb <msrb@redhat.com> - 2.1-11.14
+- maven33 rebuild #2
+
 * Sat Jan 09 2016 Michal Srb <msrb@redhat.com> - 2.1-11.13
 - maven33 rebuild
 
