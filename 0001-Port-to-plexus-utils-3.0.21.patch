@@ -1,0 +1,26 @@
+diff --git a/maven-plugin-testing-harness/src/main/java/org/apache/maven/plugin/testing/AbstractMojoTestCase.java b/maven-plugin-testing-harness/src/main/java/org/apache/maven/plugin/testing/AbstractMojoTestCase.java
+index dec1a81..ae9f06f 100644
+--- a/maven-plugin-testing-harness/src/main/java/org/apache/maven/plugin/testing/AbstractMojoTestCase.java
++++ b/maven-plugin-testing-harness/src/main/java/org/apache/maven/plugin/testing/AbstractMojoTestCase.java
+@@ -111,7 +111,7 @@ public abstract class AbstractMojoTestCase
+         XmlStreamReader reader = ReaderFactory.newXmlReader( is );
+ 
+         InterpolationFilterReader interpolationFilterReader =
+-            new InterpolationFilterReader( new BufferedReader( reader ), container.getContext().getContextData() );
++            new InterpolationFilterReader( new BufferedReader( reader ), ( Map ) container.getContext().getContextData() );
+ 
+         PluginDescriptor pluginDescriptor = new PluginDescriptorBuilder().build( interpolationFilterReader );
+ 
+diff --git a/pom.xml b/pom.xml
+index 589682d..d77ef4f 100644
+--- a/pom.xml
++++ b/pom.xml
+@@ -182,7 +182,7 @@ under the License.
+       <dependency>
+         <groupId>org.codehaus.plexus</groupId>
+         <artifactId>plexus-utils</artifactId>
+-        <version>3.0.8</version>
++        <version>3.0.21</version>
+         <scope>provided</scope>
+       </dependency>    
+     

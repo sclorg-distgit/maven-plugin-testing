@@ -4,11 +4,14 @@
 
 Name:           %{?scl_prefix}%{pkg_name}
 Version:        2.1
-Release:        11.14%{?dist}
+Release:        11.15%{?dist}
 Summary:        Maven Plugin Testing
 License:        ASL 2.0
 URL:            http://maven.apache.org/plugin-testing/
 Source0:        http://repo1.maven.org/maven2/org/apache/maven/plugin-testing/%{pkg_name}/%{version}/%{pkg_name}-%{version}-source-release.zip
+Patch0:         0001-Port-to-plexus-utils-3.0.21.patch
+Patch1:         0002-Port-to-current-maven-artifact.patch
+Patch2:         0003-Port-to-Maven-3.1.patch
 BuildArch: noarch
 
 BuildRequires: %{?scl_prefix_java_common}easymock2
@@ -52,6 +55,12 @@ Framework to test Maven Plugins with Easymock objects.
 
 %prep
 %setup -q -n %{pkg_name}-%{version}
+%{?scl:scl enable %{scl} - <<"EOF"}
+set -e -x
+%patch0 -p1
+%patch1 -p1
+%patch2 -p1
+%{?scl:EOF}
 
 %build
 %{?scl:scl enable %{scl} - <<"EOF"}
@@ -85,6 +94,9 @@ set -e -x
 %doc LICENSE NOTICE
 
 %changelog
+* Wed Jan 20 2016 Michal Srb <msrb@redhat.com> - 2.1-11.15
+- Fix FTBFS
+
 * Mon Jan 11 2016 Michal Srb <msrb@redhat.com> - 2.1-11.14
 - maven33 rebuild #2
 
