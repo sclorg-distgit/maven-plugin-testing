@@ -4,7 +4,7 @@
 
 Name:           %{?scl_prefix}%{pkg_name}
 Version:        2.1
-Release:        11.15%{?dist}
+Release:        11.16%{?dist}
 Summary:        Maven Plugin Testing
 License:        ASL 2.0
 URL:            http://maven.apache.org/plugin-testing/
@@ -16,7 +16,7 @@ BuildArch: noarch
 
 BuildRequires: %{?scl_prefix_java_common}easymock2
 BuildRequires: %{?scl_prefix_java_common}junit
-BuildRequires: %{?scl_prefix_java_common}maven-local
+BuildRequires: %{?scl_prefix}maven-local
 BuildRequires: %{?scl_prefix}maven-resources-plugin
 BuildRequires: %{?scl_prefix}maven-source-plugin
 BuildRequires: %{?scl_prefix}plexus-containers-component-metadata
@@ -94,6 +94,9 @@ set -e -x
 %doc LICENSE NOTICE
 
 %changelog
+* Mon Feb 08 2016 Michal Srb <msrb@redhat.com> - 2.1-11.16
+- Fix BR on maven-local & co.
+
 * Wed Jan 20 2016 Michal Srb <msrb@redhat.com> - 2.1-11.15
 - Fix FTBFS
 
